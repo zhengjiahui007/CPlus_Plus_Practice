@@ -40,6 +40,8 @@ int gy_test_funcparamter(std::string gy_str,int k = 0)
     return 0;
 }
 
+
+
 int main(void)
 {
     std::cout << __FUNCTION__ << " line : "<< __LINE__ << " " << (0 == GY_YELLOW) << std::endl;
@@ -55,6 +57,10 @@ int main(void)
     GY_Test gy_tt(3);
 
     gy_test_funcparamter("Garry");
+	
+	//Lambda
+	//[capture](parameters)->return-type{body}
+	//[](int x, int y) -> int { int z = x + y; return z + x; }
 
     return 0;
 }
