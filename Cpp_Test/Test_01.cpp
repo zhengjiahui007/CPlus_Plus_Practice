@@ -8,7 +8,7 @@
 #include<string>
 #include<tuple>
 #include "Test_01.hpp"
-
+#include <ranges>
 using namespace std;
 
 typedef enum gy_colour_e
@@ -40,7 +40,24 @@ int gy_test_funcparamter(std::string gy_str,int k = 0)
     return 0;
 }
 
+// 使用C++20的ranges特性
+void print_even_numbers(const std::vector<int>& numbers) {
+    auto even_numbers = numbers | std::ranges::views::filter([](int n) { return n % 2 == 0; });
+    for (int n : even_numbers) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
+}
 
+std::optional<std::string> find_name_by_id(int id) {
+    if (id == 1) {
+        return "Alice";
+    } else if (id == 2) {
+        return "Bob";
+    } else {
+        return std::nullopt; // 表示没有找到
+    }
+}
 
 int main(void)
 {
@@ -57,11 +74,22 @@ int main(void)
     GY_Test gy_tt(3);
 
     gy_test_funcparamter("Garry");
-	
-	//Lambda
-	//[capture](parameters)->return-type{body}
-	//[](int x, int y) -> int { int z = x + y; return z + x; }
 
+    std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::cout << "Even numbers: ";
+    print_even_numbers(numbers);
+    // Lambda
+    // [capture](parameters)->return-type{body}
+    auto l_da_f = [](int x, int y) -> int { int z = x + y; return z + x; };
+    std::cout << "l_da_f = " << l_da_f(3, 4) << std::endl;
+    int id = 1;
+    auto name = find_name_by_id(id);
+
+    if (name) {
+        std::cout << "Found name: " << *name << std::endl;
+    } else {
+        std::cout << "Name not found for id: " << id << std::endl;
+    }
     return 0;
 }
 
